@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "634136870473",
+    "project_id": "bkman-food",
+    "storage_bucket": "bkman-food.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634136870473:android:ca18ad717de5a6d3150998",
+        "android_client_info": {
+          "package_name": "com.bykmanfood.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634136870473-iickn7n7maghmrs97747f91dlc32dloe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfEW91lp0rTAFvjBcP96kEUtwOJSO9jog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634136870473-iickn7n7maghmrs97747f91dlc32dloe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
