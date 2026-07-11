@@ -1,0 +1,41 @@
+# Check out https://docs.codemagic.io/yaml/configuration/ for more information
+
+workflows:
+  android-workflow:
+    name: Android Workflow
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      groups:
+        - google_play # Define your MAPS_API_KEY here in Codemagic UI
+      vars:
+        PACKAGE_NAME: "com.bykmanfood.user"
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Build Android App Bundle
+        script: |
+          flutter build appbundle --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
+    artifacts:
+      - build/app/outputs/bundle/**/*.aab
+    publishing:
+      email:
+        recipients:
+          - user@example.com # Update this to your email
+        notify:
+          success: true
+          failure: true

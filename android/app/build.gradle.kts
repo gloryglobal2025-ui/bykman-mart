@@ -44,7 +44,10 @@ android {
         versionName = flutter.versionName
         multiDexEnabled = true
         
-        val mapsKey: String = localProperties.getProperty("MAPS_API_KEY") ?: ""
+        // Priority: Environment Variable (CI) > local.properties (Local)
+        val mapsKey: String = System.getenv("MAPS_API_KEY") 
+            ?: localProperties.getProperty("MAPS_API_KEY") 
+            ?: ""
         manifestPlaceholders["mapsApiKey"] = mapsKey
     }
 
