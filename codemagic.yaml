@@ -1,18 +1,18 @@
-# Check out https://docs.codemagic.io/yaml/configuration/ for more information
-
 workflows:
   android-workflow:
-    name: Android Workflow
+    name: Android APK Workflow
     instance_type: mac_mini_m1
     max_build_duration: 60
+
     environment:
       groups:
-        - google_play # Define your MAPS_API_KEY here in Codemagic UI
+        - google_play
       vars:
         PACKAGE_NAME: "com.bykmanfood.user"
       flutter: stable
       xcode: latest
       cocoapods: default
+
     triggering:
       events:
         - push
@@ -20,22 +20,32 @@ workflows:
         - pattern: main
           include: true
           source: true
+
     scripts:
       - name: Set up local.properties
         script: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
+
       - name: Get Flutter packages
         script: |
-          flutter packages pub get
-      - name: Build Android App Bundle
+          flutter clean
+          flutter pub get
+
+      - name: Increase Gradle memory
         script: |
-          flutter build appbundle --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
+          echo "org.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=2g -Dfile.encoding=UTF-8" >> android/gradle.properties
+
+      - name: Build Release APK
+        script: |
+          flutter build apk --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
+
     artifacts:
-      - build/app/outputs/bundle/**/*.aab
+      - build/app/outputs/flutter-apk/*.apk
+
     publishing:
       email:
         recipients:
-          - user@example.com # Update this to your email
+          - your-email@example.com
         notify:
           success: true
           failure: true
