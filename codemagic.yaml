@@ -45,11 +45,11 @@ workflows:
 
       - name: Build Release APK
         script: |
-          flutter build apk --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
+          flutter build apk --release --build-name=1.0.0 --build-number=$BUILD_NUMBER --android-package-name=com.bykmanfood.user
 
       - name: Build Release App Bundle
         script: |
-          flutter build appbundle --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
+          flutter build appbundle --release --build-name=1.0.0 --build-number=$BUILD_NUMBER --android-package-name=com.bykmanfood.user
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
