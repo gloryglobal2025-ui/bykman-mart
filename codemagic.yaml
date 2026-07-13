@@ -43,13 +43,20 @@ workflows:
           echo "android.enableJetifier=true" >> android/gradle.properties
           echo "android.jetifier.ignorelist=flutter-.*\\.jar,armeabi.*,x86.*" >> android/gradle.properties
 
+      - name: Verify Firebase config
+        script: |
+          echo "Package name in build.gradle.kts:"
+          grep "applicationId" android/app/build.gradle.kts
+          echo "Package name in google-services.json:"
+          grep "package_name" android/app/google-services.json
+
       - name: Build Release APK
         script: |
-          flutter build apk --release --build-name=1.0.0 --build-number=$BUILD_NUMBER --android-package-name=com.bykmanfood.user
+          flutter build apk --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
 
       - name: Build Release App Bundle
         script: |
-          flutter build appbundle --release --build-name=1.0.0 --build-number=$BUILD_NUMBER --android-package-name=com.bykmanfood.user
+          flutter build appbundle --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
