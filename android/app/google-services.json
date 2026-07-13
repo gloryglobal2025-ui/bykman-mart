@@ -20,7 +20,65 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDfEW91lp0rTAFvjBcP96kEUtwOJSO9jog"
+          "current_key": "AIzaSyBUA8I2cb9iVQKI2Dfn7YSyKlTaFGPrBVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634136870473-iickn7n7maghmrs97747f91dlc32dloe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634136870473:android:29c7aeae3ae330ac150998",
+        "android_client_info": {
+          "package_name": "com.bykmanmart.deliveryman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634136870473-iickn7n7maghmrs97747f91dlc32dloe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUA8I2cb9iVQKI2Dfn7YSyKlTaFGPrBVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634136870473-iickn7n7maghmrs97747f91dlc32dloe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634136870473:android:744cc3ab6c665ea7150998",
+        "android_client_info": {
+          "package_name": "com.bykmanmart.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634136870473-iickn7n7maghmrs97747f91dlc32dloe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUA8I2cb9iVQKI2Dfn7YSyKlTaFGPrBVg"
         }
       ],
       "services": {

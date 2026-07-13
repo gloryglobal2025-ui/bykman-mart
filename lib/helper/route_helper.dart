@@ -1162,7 +1162,7 @@ class RouteHelper {
                   Get.back();
                   await Get.find<SplashController>().setModule(null);
                   ShallowRouterHelper.updateParameter('module', 'null');
-                  Get.offAllNamed(getInitialRoute());
+                  Get.offAllNamed(getInitialRoute(moduleId: 'null'));
                 },
               ), barrierDismissible: false);
               return;

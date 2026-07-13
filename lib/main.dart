@@ -52,17 +52,17 @@ Future<void> main() async {
 
   if(GetPlatform.isWeb){
     await Firebase.initializeApp(options: const FirebaseOptions(
-        apiKey: "AIzaSyDfEW91lp0rTAFvjBcP96kEUtwOJSO9jog",
-        authDomain: "stackmart-500c7.firebaseapp.com",
+        apiKey: "AIzaSyCyIFuI9ykthsjoRc0hdITBtVd9JoDMWZ8",
+        authDomain: "bkman-food.firebaseapp.com",
         projectId: "bkman-food",
         storageBucket: "bkman-food.firebasestorage.app",
         messagingSenderId: "634136870473",
-        appId: "1:634136870473:android:ca18ad717de5a6d3150998"
+        appId: "1:634136870473:web:cd9e0bf2bd5e119b150998"
     ));
   } else if(GetPlatform.isAndroid) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: "AIzaSyDfEW91lp0rTAFvjBcP96kEUtwOJSO9jog",
+        apiKey: "AIzaSyBUA8I2cb9iVQKI2Dfn7YSyKlTaFGPrBVg",
         appId: "1:634136870473:android:ca18ad717de5a6d3150998",
         messagingSenderId: "634136870473",
         projectId: "bkman-food",
