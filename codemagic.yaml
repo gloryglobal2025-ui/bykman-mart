@@ -6,7 +6,7 @@ workflows:
 
     environment:
       groups:
-        - google_play
+        - google_play # Ensure MAPS_API_KEY is defined in this group in Codemagic UI
       vars:
         PACKAGE_NAME: "com.bykmanfood.user"
       flutter: stable
@@ -25,6 +25,7 @@ workflows:
       - name: Set up local.properties
         script: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
+          echo "MAPS_API_KEY=$MAPS_API_KEY" >> android/local.properties
 
       - name: Clean project
         script: |
@@ -34,23 +35,21 @@ workflows:
         script: |
           flutter pub get
 
-      - name: Increase Gradle memory
+      - name: Configure Gradle Memory & Jetifier
         script: |
-          echo "org.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=2g -Dfile.encoding=UTF-8" >> android/gradle.properties
+          # Fresh properties file to avoid duplicate/loop issues
+          echo "org.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=2g -Dfile.encoding=UTF-8" > android/gradle.properties
+          echo "android.useAndroidX=true" >> android/gradle.properties
+          echo "android.enableJetifier=true" >> android/gradle.properties
+          echo "android.jetifier.ignorelist=flutter-.*\\.jar,armeabi.*,x86.*" >> android/gradle.properties
 
       - name: Build Release APK
         script: |
-          flutter build apk \
-            --release \
-            --build-name=1.0.0 \
-            --build-number=$BUILD_NUMBER
+          flutter build apk --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
 
       - name: Build Release App Bundle
         script: |
-          flutter build appbundle \
-            --release \
-            --build-name=1.0.0 \
-            --build-number=$BUILD_NUMBER
+          flutter build appbundle --release --build-name=1.0.0 --build-number=$BUILD_NUMBER
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
