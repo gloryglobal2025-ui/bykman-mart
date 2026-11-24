@@ -1,0 +1,78 @@
+name: Build Flutter APK and Web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    name: Build web
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build web app
+        run: flutter build web --release
+
+      - name: Upload web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: bykman-mart-web
+          path: build/web
+          if-no-files-found: error
+
+  android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Generate Gradle wrapper
+        run: |
+          mkdir -p .gradle-wrapper
+          gradle wrapper --gradle-version 8.14.3 --distribution-type all -p .gradle-wrapper
+          cp .gradle-wrapper/gradlew .gradle-wrapper/gradlew.bat android/
+          cp .gradle-wrapper/gradle/wrapper/gradle-wrapper.jar android/gradle/wrapper/
+          chmod +x android/gradlew
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: bykman-mart-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
