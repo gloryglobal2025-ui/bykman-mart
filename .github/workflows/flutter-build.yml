@@ -37,13 +37,11 @@ jobs:
         with:
           channel: stable
           cache: true
-      - name: Generate Gradle wrapper
+      - name: Install Gradle wrapper
         run: |
-          mkdir -p .gradle-wrapper
-          touch .gradle-wrapper/settings.gradle
-          gradle wrapper --gradle-version 8.14.3 --distribution-type all -p .gradle-wrapper
-          cp .gradle-wrapper/gradlew .gradle-wrapper/gradlew.bat android/
-          cp .gradle-wrapper/gradle/wrapper/gradle-wrapper.jar android/gradle/wrapper/
+          curl -fsSL https://raw.githubusercontent.com/gradle/gradle/v8.14.3/gradlew -o android/gradlew
+          curl -fsSL https://raw.githubusercontent.com/gradle/gradle/v8.14.3/gradlew.bat -o android/gradlew.bat
+          curl -fsSL https://raw.githubusercontent.com/gradle/gradle/v8.14.3/gradle/wrapper/gradle-wrapper.jar -o android/gradle/wrapper/gradle-wrapper.jar
           chmod +x android/gradlew
       - run: flutter pub get
       - run: flutter build apk --release
