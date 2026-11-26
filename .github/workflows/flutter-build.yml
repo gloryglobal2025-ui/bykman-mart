@@ -40,6 +40,7 @@ jobs:
       - name: Generate Gradle wrapper
         run: |
           mkdir -p .gradle-wrapper
+          touch .gradle-wrapper/settings.gradle
           gradle wrapper --gradle-version 8.14.3 --distribution-type all -p .gradle-wrapper
           cp .gradle-wrapper/gradlew .gradle-wrapper/gradlew.bat android/
           cp .gradle-wrapper/gradle/wrapper/gradle-wrapper.jar android/gradle/wrapper/
